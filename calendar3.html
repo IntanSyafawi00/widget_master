@@ -1,0 +1,120 @@
+$color-background: #669BBC
+$color-primary: #29335C
+$color-secondary: #F3A712
+$color-shadow: rgba(0, 0, 0, 0.27)
+$color-rings: #fff
+
+=size($width, $height)
+  width: percentage($width / 100)
+  height: percentage($height / 100)
+
+=position($top, $left)
+  position: absolute
+  top: percentage($top / 100)
+  left: percentage($left / 100)
+
+body
+  padding-top: 5vh
+  background-color: $color-background
+
+.calendar
+  position: relative
+  margin: auto
+  width: 70vw
+  height: 70vw
+
+.base
+  +size(70, 45)
+  border-radius: 2vw
+  box-shadow: 0.2vw 0.2vw 1vw 0 $color-shadow
+  overflow: hidden
+
+  &.top
+    +position(5, 15)
+    background-color: $color-primary
+
+    .holes
+      +position(88, 4)
+
+  &.bottom
+    +position(51, 15)
+    background-color: #fff
+
+    .holes
+      +position(4, 4)
+
+    &::before
+      content: ' '
+      display: block
+      +size(100, 28)
+      background-color: $color-primary
+
+.holes
+  +size(45 / 0.7 * 2, 100 * 2)
+
+  .hole
+    background-color: $color-background
+    +size(4, 4)
+    border-radius: 50%
+    display: inline-block
+    margin-left: 3.8vw
+    box-shadow: inset 0.2vw 0.2vw 1vw 0 $color-shadow
+
+.rings
+  +size(70, 10)
+  +position(45.5, 17.3)
+
+  .ring
+    +size(3.5, 100)
+    display: inline-block
+    background-color: lighten($color-rings, 10%)
+    margin-left: 4.6vw
+    border-radius: 70% / 10%
+    box-shadow: 0.3vw 0 0.5vw -0.2vw $color-shadow
+
+.year-side
+  background-color: $color-secondary
+  +size(20, 100)
+  +position(0, 0)
+
+  &::after
+    content: '2017'
+    display: block
+    color: $color-primary
+    font-family: Roboto, sans-serif
+    font-size: 7vw
+    transform: rotate(-90deg)
+    +position(35, -30)
+
+.month-side
+  +size(80, 100)
+  +position(0, 20)
+
+  &::after
+    content: 'MAY'
+    display: block
+    color: $color-secondary
+    font-family: Roboto, sans-serif
+    font-size: 8vw
+    +position(35, 25)
+
+.days
+  +size(90, 75)
+  +position(15, 5)
+  display: grid
+  grid-template: repeat(6, 1fr) / repeat(7, 1fr)
+  grid-gap: 0.2vw
+
+  &>div
+    text-align: center
+    padding-top: 20%
+    font-family: Roboto, sans-serif
+    font-size: 1.8vw
+    color: $color-primary
+
+    &.old
+      color: #999
+
+    &.weekday
+      font-weight: bold
+      color: $color-secondary
